@@ -29,17 +29,18 @@
         body { margin: 0; font-family: var(--font-main); background-color: var(--bg); color: var(--text); overflow-x: hidden; }
         
         /* Navigation */
-        nav { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(5px); }
+        nav { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(10px); }
         .logo-container { display: flex; align-items: center; gap: 15px; }
         .logo-img { height: 60px; width: auto; transition: height 0.3s; }
         
-        /* DESKTOP LOGO SIZE */
+        /* DESKTOP LOGO TEXT */
         .logo-text { font-family: var(--font-logo); font-size: 2.5rem; letter-spacing: 0.05em; color: white; line-height: 1; margin-top: 5px; }
         
         .nav-link { color: var(--text-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
         .nav-link:hover { color: var(--text); }
 
         /* Hero Section */
+        /* Desktop: Full height */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
         
         #globe-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; cursor: grab; touch-action: none; }
@@ -77,15 +78,25 @@
         
         /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) { 
+            /* Hero is shorter on mobile */
             .hero { height: 80vh; } 
+            
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
             h1 { font-size: 2.2rem; margin-bottom: 2rem; } 
             
-            /* ADJUSTED MOBILE LOGO BALANCE */
-            .logo-img { height: 45px; } /* Slightly larger icon */
-            .logo-text { font-size: 2.2rem; } /* Larger text to match icon weight */
+            /* --- LOGO FIXES --- */
+            /* Icon size */
+            .logo-img { height: 50px; } 
+            /* Text size significantly increased to balance with icon */
+            .logo-text { font-size: 2.8rem; margin-top: 6px; } 
             
             nav { padding: 1rem; }
+        }
+        
+        /* Landscape Mobile Specific (Fixes short height screens) */
+        @media (max-height: 500px) and (orientation: landscape) {
+             .hero { height: 100vh; } /* Use full height in landscape to avoid crunch */
+             h1 { font-size: 1.8rem; margin-bottom: 1rem; }
         }
     </style>
 </head>
@@ -130,21 +141,25 @@
 
 <script>
     const canvas = document.getElementById('globe-canvas');
+    // Grab the hero container to size the canvas perfectly to IT, not the window
+    const heroSection = document.querySelector('.hero');
     const ctx = canvas.getContext('2d');
+    
     let width, height, particles = [];
     
-    // Initial State
     let rotation = { x: 0, y: 0 }, targetRotation = { x: 0, y: 0 }, isDragging = false, lastMouse = { x: 0, y: 0 };
     const symbols = ['0', '1', 'KWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'ft', 'lbs', '$'];
-
-    // DYNAMIC VARIABLES (Set in resize)
+    
     let globeRadius;
     let particleCount;
 
     function resize() {
         const dpr = window.devicePixelRatio || 1;
-        width = window.innerWidth;
-        height = window.innerHeight;
+        
+        // --- FIX: MEASURE THE HERO SECTION, NOT THE WINDOW ---
+        // This ensures if hero is 80vh, canvas is 80vh. No clipping.
+        width = heroSection.clientWidth;
+        height = heroSection.clientHeight;
         
         canvas.width = width * dpr;
         canvas.height = height * dpr;
@@ -152,22 +167,20 @@
         canvas.style.height = `${height}px`;
         ctx.scale(dpr, dpr);
         
-        const isMobile = width < 768;
+        const isMobile = window.innerWidth < 768;
 
-        // --- FIX 1: DYNAMIC RADIUS ---
-        // Calculate radius based on the SMALLER dimension (width or height)
-        // This ensures it never gets cut off top/bottom or left/right
+        // Calculate radius based on available container space
         const minDimension = Math.min(width, height);
         
         if (isMobile) {
-            globeRadius = minDimension * 0.40; // 40% of screen width on mobile
+            // Slightly smaller multiplier for mobile to ensure padding
+            globeRadius = minDimension * 0.38; 
             particleCount = 350;
         } else {
-            globeRadius = minDimension * 0.35; // 35% of screen height on desktop
+            globeRadius = minDimension * 0.35;
             particleCount = 750;
         }
 
-        // Re-initialize particles on resize to fit new radius
         initParticles();
     }
 
@@ -177,8 +190,6 @@
             const phi = Math.acos(-1 + (2 * i) / particleCount);
             const theta = Math.sqrt(particleCount * Math.PI) * phi;
             particles.push({
-                // Store normalized position (0 to 1) and multiply by current radius during render?
-                // Or just reset them here. Resetting is cleaner for this effect.
                 xBase: Math.cos(theta) * Math.sin(phi),
                 yBase: Math.sin(theta) * Math.sin(phi),
                 zBase: Math.cos(phi),
@@ -188,8 +199,6 @@
     }
 
     window.addEventListener('resize', resize);
-    
-    // Call resize immediately to set initial values
     resize();
 
     function handleStart(x, y) { isDragging = true; lastMouse = { x, y }; }
@@ -211,9 +220,7 @@
     window.addEventListener('touchend', handleEnd);
 
     function animate() {
-        // Clear logic dimensions
         ctx.clearRect(0, 0, width, height);
-        
         if (!isDragging) targetRotation.y += 0.002;
         rotation.x += (targetRotation.x - rotation.x) * 0.1;
         rotation.y += (targetRotation.y - rotation.y) * 0.1;
@@ -222,7 +229,6 @@
         const renderList = [];
 
         particles.forEach(p => {
-            // Multiply normalized base by CURRENT globeRadius
             let x = p.xBase * globeRadius;
             let y = p.yBase * globeRadius;
             let z = p.zBase * globeRadius;
@@ -241,15 +247,13 @@
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         
         renderList.forEach(p => {
-            // Dynamic Perspective Scale based on radius
             const perspective = globeRadius * 1.5; 
             const scale = perspective / (perspective + p.z); 
-            
             const px = cx + p.x * scale, py = cy + p.y * scale;
             const alpha = (p.z + globeRadius) / (2.5 * globeRadius); 
             
             if(alpha > 0) {
-                // Opacity is 0.6 multiplier for subtle look
+                // Subtle opacity (0.6 multiplier)
                 ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.6})`;
                 ctx.font = `${(p.char.length > 3 ? 10 : 14) * scale}px monospace`;
                 ctx.fillText(p.char, px, py);
