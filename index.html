@@ -3,56 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dexdogs | Strategic Consulting</title>
+    <title>Dexdogs | Strategic Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #2c3e50; --accent: #3498db; --light: #ecf0f1; }
-        body { font-family: system-ui, sans-serif; margin: 0; line-height: 1.6; color: #333; }
-        header { background: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); }
-        .hero { background: var(--primary); color: white; padding: 4rem 5%; text-align: center; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .btn { background: var(--accent); color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 1rem; }
-        .container { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .card { padding: 2rem; border: 1px solid #ddd; border-radius: 8px; text-align: center; }
-        footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: auto; }
+        :root {
+            --bg: #050505;
+            --surface: #121212;
+            --text: #ffffff;
+            --text-gray: #a1a1aa;
+            --accent: #3b82f6; /* Electric Blue */
+            --accent-glow: rgba(59, 130, 246, 0.5);
+        }
+        body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+        
+        /* Navigation */
+        nav { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; backdrop-filter: blur(10px); background: rgba(5,5,5,0.7); z-index: 1000; box-sizing: border-box; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .logo { font-weight: 700; letter-spacing: -0.05em; font-size: 1.25rem; }
+        .nav-link { color: var(--text-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .nav-link:hover { color: var(--text); }
+
+        /* Hero Section */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 1rem; background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 70%); }
+        h1 { font-size: 4rem; margin: 0 0 1rem 0; letter-spacing: -0.03em; line-height: 1.1; background: linear-gradient(to bottom right, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: var(--text-gray); font-size: 1.25rem; max-width: 600px; margin-bottom: 2.5rem; font-weight: 300; }
+        
+        .btn { background: var(--text); color: black; padding: 1rem 2rem; border-radius: 4px; text-decoration: none; font-weight: 600; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px var(--accent-glow); background: var(--accent); color: white; }
+
+        /* Grid Section */
+        .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: var(--surface); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); transition: border-color 0.3s; }
+        .card:hover { border-color: var(--accent); }
+        .card h3 { margin-top: 0; font-size: 1.5rem; letter-spacing: -0.02em; }
+        .card p { color: var(--text-gray); line-height: 1.6; }
+
+        footer { text-align: center; padding: 3rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
 
-<header>
+<nav>
     <div class="logo">DEXDOGS</div>
-    <nav><a href="#contact" style="text-decoration: none; color: var(--primary);">Contact</a></nav>
-</header>
+    <div><a href="mailto:contact@dexdogs.com" class="nav-link">Get in Touch</a></div>
+</nav>
 
 <section class="hero">
-    <h1>Expert Consulting Solutions</h1>
-    <p>Driving strategic growth for businesses in Massachusetts and beyond.</p>
-    <a href="#contact" class="btn">Get Started</a>
+    <h1>Capital Efficiency.<br>Data Strategy.</h1>
+    <p class="subtitle">Dexdogs consults for high-growth firms. We optimize working capital and build data-driven operational leverage.</p>
+    <a href="mailto:contact@dexdogs.com" class="btn">Deploy Strategy</a>
 </section>
 
-<section class="container">
-    <h2 style="text-align: center;">Our Services</h2>
-    <div class="services-grid">
+<section class="section">
+    <div class="grid">
         <div class="card">
-            <h3>Strategy</h3>
-            <p>Data-driven insights to navigate complex markets.</p>
+            <h3>Negative Working Capital</h3>
+            <p>Unlock hidden cash flow. We restructure operations to increase float and fund growth from within.</p>
         </div>
         <div class="card">
-            <h3>Operations</h3>
-            <p>Streamlining processes for maximum efficiency.</p>
+            <h3>Data Architecture</h3>
+            <p>Turn raw metrics into strategic assets. Scalable systems for sole proprietorships and SMEs.</p>
         </div>
         <div class="card">
-            <h3>Advisory</h3>
-            <p>Trusted guidance for sole proprietorships and SMEs.</p>
+            <h3>Market Intelligence</h3>
+            <p>Boston-based advisory for complex markets. Navigate regulatory landscapes with precision.</p>
         </div>
     </div>
 </section>
 
-<footer id="contact">
-    <p><strong>Dexdogs Consulting</strong></p>
-    <p>Boston, MA, USA</p>
-    <p>&copy; 2026 Dexdogs. All rights reserved.</p>
+<footer>
+    &copy; 2026 Dexdogs Consulting. Boston, MA.<br>
 </footer>
 
 </body>
