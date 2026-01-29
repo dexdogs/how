@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dexdogs | your environmental index watchdogs.</title>
+    <title>Dexdogs | Environmental Index</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* 1. DEFINE THE CUSTOM FONT FOR LOGO ONLY */
+        /* 1. CUSTOM FONT FOR LOGO ONLY */
         @font-face {
             font-family: 'BPdots';
             src: url('./BPdots.otf') format('opentype'),
@@ -23,9 +23,8 @@
             --text-gray: #a1a1aa;
             --accent: #3b82f6;
             
-            /* Font Definitions */
             --font-logo: 'BPdots', 'Courier New', monospace; 
-            --font-main: 'Inter', sans-serif; /* Clean tech font for everything else */
+            --font-main: 'Inter', sans-serif; 
         }
         
         body { margin: 0; font-family: var(--font-main); background-color: var(--bg); color: var(--text); overflow-x: hidden; }
@@ -33,14 +32,17 @@
         /* Navigation */
         nav { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(5px); }
         
-        .logo-container { display: flex; align-items: center; gap: 12px; }
-        .logo-img { height: 40px; width: auto; }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        
+        /* INCREASED LOGO SIZE HERE */
+        .logo-img { height: 60px; width: auto; }
+        
         .logo-text { 
-            font-family: var(--font-logo); /* ONLY THIS USES BPDOTS */
+            font-family: var(--font-logo); 
             font-size: 1.5rem; 
             letter-spacing: 0.05em;
             color: white;
-            text-transform: uppercase;
+            /* REMOVED text-transform: uppercase; */
         }
 
         .nav-link { color: var(--text-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
@@ -49,99 +51,67 @@
         /* Hero Section */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
         
-        /* Canvas needs to grab events */
         #globe-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; cursor: grab; }
         #globe-canvas:active { cursor: grabbing; }
 
         .hero-content { z-index: 1; padding: 0 1rem; pointer-events: none; }
-        /* Re-enable clicks for buttons/text */
         .hero-content > * { pointer-events: auto; }
 
         h1 { 
-            font-family: var(--font-main); /* INTER FONT */
+            font-family: var(--font-main); 
             font-weight: 700;
-            font-size: 4.5rem; 
+            font-size: 4rem; 
             margin: 0 0 1.5rem 0; 
             letter-spacing: -0.04em;
-            line-height: 1; 
-            background: linear-gradient(to bottom right, #fff, #888); 
+            
+            /* FIX FOR CUT OFF 'g' */
+            line-height: 1.2; 
+            padding-bottom: 0.1em;
+            
+            background: linear-gradient(to bottom right, #fff, #999); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
         }
         
-        p.subtitle { color: var(--text-gray); font-size: 1.25rem; max-width: 600px; margin: 0 auto 2.5rem auto; font-weight: 300; }
-        
         .btn { 
-            font-family: var(--font-main); /* INTER FONT */
+            font-family: var(--font-main);
             background: var(--text); 
             color: black; 
             padding: 1rem 2.5rem; 
             border-radius: 50px; 
             text-decoration: none; 
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.2s; 
         }
         .btn:hover { background: var(--accent); color: white; box-shadow: 0 0 25px rgba(59, 130, 246, 0.6); }
 
-        /* Grid Section */
-        .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; background: var(--bg); position: relative; z-index: 2; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        
-        .card { background: var(--surface); padding: 2.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        
-        .card h3 { 
-            font-family: var(--font-main); /* INTER FONT */
-            margin-top: 0; 
-            font-size: 1.5rem; 
-            color: var(--text);
-        }
-        .card p { color: var(--text-gray); line-height: 1.6; }
-
+        /* Footer */
         footer { text-align: center; padding: 3rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg); position: relative; z-index: 2; }
         
-        @media (max-width: 768px) { h1 { font-size: 3rem; } }
+        @media (max-width: 768px) { h1 { font-size: 2.8rem; } }
     </style>
 </head>
 <body>
 
 <nav>
     <div class="logo-container">
-        <img src="logo.png" alt="dexdogs logo" class="logo-img">
+        <img src="logo.png" alt="dog logo" class="logo-img">
         <span class="logo-text">dexdogs</span>
     </div>
-    <div><a href="mailto:carboncatscc@gmail.com" class="nav-link">Contact</a></div>
+    <div><a href="mailto:contact@dexdogs.com" class="nav-link">Contact</a></div>
 </nav>
 
 <section class="hero">
     <canvas id="globe-canvas"></canvas>
     <div class="hero-content">
         <h1>your environmental<br>index watchdogs.</h1>
-        <p class="subtitle"> </p>
-        <a href="#services" class="btn">HOW?</a>
-    </div>
-</section>
-
-<section id="services" class="section">
-    <div class="grid">
-        <div class="card">
-            <h3>Neg. Working Capital</h3>
-            <p>Optimizing cash conversion cycles to fund growth internally.</p>
-        </div>
-        <div class="card">
-            <h3>Data Architecture</h3>
-            <p>Building scalable structures for raw metrics and operational leverage.</p>
-        </div>
-        <div class="card">
-            <h3>Advisory</h3>
-            <p>Expert guidance on navigating complex regulatory environments.</p>
-        </div>
+        <a href="mailto:contact@dexdogs.com" class="btn">HOW?</a>
     </div>
 </section>
 
 <footer>
-    &copy; 2026 Dexdogs Consulting. Boston, MA.
+    &copy; 2026 Dexdogs.
 </footer>
 
 <script>
@@ -161,7 +131,7 @@
     let isDragging = false;
     let lastMouse = { x: 0, y: 0 };
 
-    // SYMBOLS (Using Unicode subscripts for CO₂ and CH₄)
+    // SYMBOLS
     const symbols = ['0', '1', 'KWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'ft', 'lbs', '$'];
 
     function resize() {
@@ -173,15 +143,13 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Initialize particles (Static base positions)
+    // Initialize particles
     for (let i = 0; i < particleCount; i++) {
         const phi = Math.acos(-1 + (2 * i) / particleCount);
         const theta = Math.sqrt(particleCount * Math.PI) * phi;
-        
         const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
 
         particles.push({
-            // Store original spherical coordinates
             xBase: globeRadius * Math.cos(theta) * Math.sin(phi),
             yBase: globeRadius * Math.sin(theta) * Math.sin(phi),
             zBase: globeRadius * Math.cos(phi),
@@ -189,7 +157,7 @@
         });
     }
 
-    // --- INTERACTION HANDLERS ---
+    // --- INTERACTION ---
     function handleStart(x, y) {
         isDragging = true;
         lastMouse = { x, y };
@@ -206,37 +174,28 @@
         lastMouse = { x, y };
     }
     
-    function handleEnd() {
-        isDragging = false;
-    }
+    function handleEnd() { isDragging = false; }
 
-    // Mouse Events
     canvas.addEventListener('mousedown', e => handleStart(e.clientX, e.clientY));
     window.addEventListener('mousemove', e => handleMove(e.clientX, e.clientY));
     window.addEventListener('mouseup', handleEnd);
 
-    // Touch Events (for mobile)
     canvas.addEventListener('touchstart', e => handleStart(e.touches[0].clientX, e.touches[0].clientY), {passive: false});
     window.addEventListener('touchmove', e => {
-        if(isDragging) e.preventDefault(); // Stop scrolling while rotating globe
+        if(isDragging) e.preventDefault();
         handleMove(e.touches[0].clientX, e.touches[0].clientY);
     }, {passive: false});
     window.addEventListener('touchend', handleEnd);
 
-    // --- ANIMATION LOOP ---
+    // --- ANIMATION ---
     function animate() {
         ctx.clearRect(0, 0, width, height);
 
-        // Ease rotation toward target (smooth inertia)
-        if (!isDragging) {
-            targetRotation.y += 0.002; // Auto-rotate speed
-        }
+        if (!isDragging) targetRotation.y += 0.002;
         
-        // Linear interpolation for smoothness
         rotation.x += (targetRotation.x - rotation.x) * 0.1;
         rotation.y += (targetRotation.y - rotation.y) * 0.1;
 
-        // Calculate rotation matrix values
         const cosY = Math.cos(rotation.y);
         const sinY = Math.sin(rotation.y);
         const cosX = Math.cos(rotation.x);
@@ -244,25 +203,15 @@
 
         const renderList = [];
 
-        // Transform every particle
         particles.forEach(p => {
-            // 1. Rotate around Y axis
             let x1 = p.xBase * cosY - p.zBase * sinY;
             let z1 = p.zBase * cosY + p.xBase * sinY;
-            
-            // 2. Rotate around X axis
             let y2 = p.yBase * cosX - z1 * sinX;
             let z2 = z1 * cosX + p.yBase * sinX;
 
-            renderList.push({
-                x: x1,
-                y: y2,
-                z: z2,
-                char: p.char
-            });
+            renderList.push({ x: x1, y: y2, z: z2, char: p.char });
         });
 
-        // Sort by Z depth (painter's algorithm)
         renderList.sort((a, b) => a.z - b.z);
 
         const cx = width / 2;
@@ -272,20 +221,15 @@
         ctx.textBaseline = 'middle';
 
         renderList.forEach(p => {
-            // Perspective projection
             const scale = 350 / (350 + p.z); 
             const px = cx + p.x * scale;
             const py = cy + p.y * scale;
             const alpha = (p.z + globeRadius) / (2.5 * globeRadius); 
 
             if(alpha > 0) {
-                // Style
                 ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-                
-                // Adjust font size for longer chemical formulas
                 let fontSize = 14 * scale;
                 if (p.char.length > 3) fontSize = 10 * scale; 
-                
                 ctx.font = `${fontSize}px monospace`;
                 ctx.fillText(p.char, px, py);
             }
