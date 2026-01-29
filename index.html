@@ -28,6 +28,7 @@
         html { scroll-behavior: smooth; }
         body { margin: 0; font-family: var(--font-main); background-color: var(--bg); color: var(--text); overflow-x: hidden; }
         
+        /* Navigation */
         nav { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(5px); }
         .logo-container { display: flex; align-items: center; gap: 15px; }
         .logo-img { height: 60px; width: auto; transition: height 0.3s; }
@@ -35,18 +36,36 @@
         .nav-link { color: var(--text-gray); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
         .nav-link:hover { color: var(--text); }
 
-        /* Hero */
+        /* Hero Section */
+        /* Desktop: Full height (100vh) */
         .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
+        
         #globe-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; cursor: grab; touch-action: none; }
         #globe-canvas:active { cursor: grabbing; }
+        
         .hero-content { z-index: 1; padding: 0 1rem; pointer-events: none; width: 100%; box-sizing: border-box; }
         .hero-content > * { pointer-events: auto; }
-        h1 { font-family: var(--font-main); font-weight: 700; font-size: 4rem; margin: 0 0 1.5rem 0; letter-spacing: -0.04em; line-height: 1.2; padding-bottom: 0.1em; background: linear-gradient(to bottom right, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        h1 { 
+            font-family: var(--font-main); 
+            font-weight: 700; 
+            font-size: 4rem; 
+            margin: 0 0 1.5rem 0; 
+            letter-spacing: -0.04em; 
+            line-height: 1.2; 
+            padding-bottom: 0.1em; /* Fixes 'g' cutoff */
+            background: linear-gradient(to bottom right, #fff, #999); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        
         .btn { font-family: var(--font-main); background: var(--text); color: black; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 700; transition: all 0.2s; cursor: pointer; display: inline-block; }
 
         /* Services Grid Section */
-        .section { padding: 8rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; background: var(--bg); }
+        /* Desktop padding: Reduced from 8rem to 6rem for a nice balance */
+        .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; background: var(--bg); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        
         .card { background: var(--surface); padding: 3rem 2.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s, border-color 0.3s; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         .card h3 { font-family: var(--font-main); margin-top: 0; font-size: 1.5rem; color: var(--text); letter-spacing: -0.02em; }
@@ -54,12 +73,18 @@
 
         footer { text-align: center; padding: 4rem 2rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg); position: relative; z-index: 2; }
         
+        /* --- MOBILE ADJUSTMENTS --- */
         @media (max-width: 768px) { 
+            /* 1. SHORTEN HERO: Pulls content up significantly on mobile */
+            .hero { height: 80vh; } 
+            
+            /* 2. REMOVE GAP: Reduced top padding to almost zero */
+            .section { padding: 1rem 1.5rem 4rem 1.5rem; }
+            
             h1 { font-size: 2.2rem; margin-bottom: 2rem; } 
             .logo-img { height: 40px; }
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
-            .section { padding: 4rem 1.5rem; }
         }
     </style>
 </head>
@@ -91,7 +116,7 @@
             <h3>Data Architecture</h3>
             <p>Building high-integrity infrastructure for carbon data and environmental metrics reporting.</p>
         </div>
-        <div class="card :cite">
+        <div class="card">
             <h3>Advisory</h3>
             <p>Strategic guidance for high-growth firms navigating the complex landscape of environmental intelligence.</p>
         </div>
