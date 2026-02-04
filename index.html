@@ -53,6 +53,14 @@
             cursor: pointer;
         }
         .nav-link:hover { color: var(--text); }
+
+        /* NEW: Navbar Divider (Desktop Default: Vertical) */
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: block;
+        }
                
         /* DROPDOWN STYLES */
         .dropdown { position: relative; display: inline-block; cursor: pointer; }
@@ -253,7 +261,6 @@
 
         .timeline-end {
             text-align: center;
-            /* REDUCED: Was 4rem, now 2rem to reduce gap to hero boards */
             margin-top: 2rem;
             position: relative;
             z-index: 2;
@@ -267,12 +274,7 @@
             transition: transform 0.2s;
         }
         
-        /* DELETED the specific .timeline-end a:hover rule here. 
-           It now inherits purely from .btn (white bg, black text) 
-           so it won't disappear on hover. */
-
         /* Services Grid Section */
-        /* REDUCED: Padding-top changed from 6rem to 0rem to tighten gap */
         .section { padding: 0rem 2rem 6rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; background: var(--bg); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         
@@ -280,6 +282,44 @@
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         .card h3 { font-family: var(--font-logo); margin-top: 0; font-size: 1.5rem; color: var(--text); letter-spacing: 0.05em; }
         .card p { color: var(--text-gray); line-height: 1.7; font-size: 1rem; font-weight: 300; }
+
+        /* NEW TEAM SECTION STYLES */
+        #team {
+            padding-top: 0; 
+            padding-bottom: 6rem;
+            text-align: center;
+        }
+        
+        .team-member {
+            margin: 0 auto;
+            max-width: 300px;
+        }
+        
+        .member-photo {
+            width: 180px;
+            height: 180px;
+            background-color: var(--surface); /* Fallback color */
+            border-radius: 50%;
+            margin: 0 auto 1.5rem auto;
+            border: 1px solid rgba(255,255,255,0.1);
+            object-fit: cover;
+            display: block;
+        }
+        
+        .member-name {
+            font-family: var(--font-logo);
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .member-role {
+            font-family: var(--font-main);
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 300;
+        }
 
         footer { text-align: center; padding: 4rem 2rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg); position: relative; z-index: 2; }
         
@@ -292,7 +332,6 @@
                 padding-bottom: 0;
             } 
             
-            /* Restored padding for mobile legibility */
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
             #timeline { padding: 0 1rem 4rem 1rem; }
             
@@ -311,6 +350,13 @@
                 align-items: flex-end; 
             }
             
+            /* NEW: Rotate divider to horizontal for mobile stack */
+            .nav-divider {
+                width: 30px;
+                height: 1px;
+                margin: 5px 0;
+            }
+            
             .nav-link { padding: 5px 0; font-size: 0.9rem; }
             .dropdown-trigger { padding: 5px 0; font-size: 0.9rem; }
 
@@ -319,7 +365,6 @@
             .timeline-stage { justify-content: inherit; margin-left: 0; }
             .stage-content { width: calc(50% - 30px); margin: 0; }
             
-            /* Adjust Back to Top for Mobile */
             #backToTop { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 1.2rem; }
         }
     </style>
@@ -334,6 +379,8 @@
     
     <div class="nav-right">
         <a href="#core-capabilities" class="nav-link">services</a>
+
+        <div class="nav-divider"></div>
 
         <div class="dropdown">
             <span class="dropdown-trigger">connect</span>
@@ -398,6 +445,17 @@
             <h3>Strategic Environmental Leadership</h3>
             <p>Deploy proforma. Align strategy to transform environmental data from cost center to profit-driving asset. Build boardroom integrity and trust.</p>
         </div>
+    </div>
+</section>
+
+<section id="team" class="section">
+    <h2 style="font-family: var(--font-main); text-align: center; margin-bottom: 3rem;">Team</h2>
+    <div class="team-member">
+        <img src="team.png" alt="Team Member" class="member-photo">
+        
+        <div class="member-name">Name Here</div>
+        
+        <div class="member-role">Job Role Here</div>
     </div>
 </section>
 
