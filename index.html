@@ -210,15 +210,12 @@
         
         .timeline-end a {
             font-family: var(--font-main);
-            color: var(--text-gray);
             text-decoration: none;
             font-size: 1.2rem;
-            transition: color 0.3s;
-            background: var(--surface);
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
+            display: inline-block; /* Ensures the button transform works */
+            transition: transform 0.2s;
         }
+
         
         .timeline-end a:hover {
             color: var(--text);
@@ -281,7 +278,7 @@
     <canvas id="globe-canvas"></canvas>
     <div class="hero-content">
         <h1>your environmental<br>index watchdogs.</h1>
-        <a href="#timeline-start" class="btn">Our Stakeholder Network</a>
+        <a href="#timeline-start" class="btn">Our Stakeholder Network &darr;</a>
     </div>
 </section>
 
@@ -309,7 +306,8 @@
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Regulators</div><div class="stage-subtitle">eg. IRS, Ministry of Energy, Building Departments</div></div><div class="stage-marker"></div></div>
     
     <div class="timeline-end">
-        <a href="#Our Core Capabilities">Our Core Capabilities &darr;</a>
+        <a href="#Our Core Capabilities"
+    class="btn">Our Core Capabilities &darr;</a>
     </div>
 </section>
 
