@@ -33,27 +33,7 @@
         .logo-container { display: flex; align-items: center; gap: 15px; }
         .logo-img { height: 60px; width: auto; transition: height 0.3s; }
         .logo-text { font-family: var(--font-logo); font-size: 2.5rem; letter-spacing: 0.05em; color: white; }
-
-        /* New container to align Services and Connect side-by-side */
-        .nav-right { 
-            display: flex; 
-            align-items: center; 
-            gap: 2rem; /* Space between the buttons */
-        }
-
-        /* Style for the new Services link to match Connect exactly */
-        .nav-link { 
-            color: var(--text-gray); 
-            transition: color 0.3s; 
-            padding: 10px 0;
-            font-family: var(--font-main);
-            font-size: 1rem; 
-            font-weight: 500;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .nav-link:hover { color: var(--text); }
-        
+               
         /* DROPDOWN STYLES */
         .dropdown { position: relative; display: inline-block; cursor: pointer; }
         .dropdown-trigger { 
@@ -261,8 +241,6 @@
                 /* UPDATED: Increased top padding to 80px to push text down */
                 padding-top: 80px; 
                 padding-bottom: 0;
-                /* Reduce gap between Services and Connect on mobile */
-                .nav-right { gap: 1rem; }
             } 
             
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
