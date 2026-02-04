@@ -36,7 +36,14 @@
         
         /* DROPDOWN STYLES */
         .dropdown { position: relative; display: inline-block; cursor: pointer; }
-        .dropdown-trigger { color: var(--text-gray); font-size: 0.9rem; transition: color 0.3s; padding: 10px 0; }
+        .dropdown-trigger { 
+            color: var(--text-gray); 
+            transition: color 0.3s; 
+            padding: 10px 0;
+            font-family: var(--font-main);
+            font-size: 1rem; 
+            font-weight: 500;
+        }
         .dropdown-trigger:hover { color: var(--text); }
         
         .dropdown-content {
@@ -54,6 +61,7 @@
         }
         
         .dropdown-content a {
+            font-family: var(--font-main);
             color: var(--text-gray);
             padding: 12px 16px;
             text-decoration: none;
@@ -61,21 +69,19 @@
             font-size: 0.9rem;
             transition: background 0.2s, color 0.2s;
         }
-        
         .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--text); }
         .dropdown:hover .dropdown-content { display: block; }
 
         /* Hero Section */
         .hero { 
             position: relative; 
-            height: 100vh; 
+            height: 100svh; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
             align-items: center; 
             text-align: center; 
             overflow: hidden; 
-            /* FIX 3: Added padding-top to push globe down from behind the nav */
             padding-top: 80px; 
             box-sizing: border-box; 
         }
@@ -89,34 +95,169 @@
         h1 { font-family: var(--font-main); font-weight: 700; font-size: 4rem; margin: 0 0 1.5rem 0; letter-spacing: -0.04em; line-height: 1.2; padding-bottom: 0.1em; background: linear-gradient(to bottom right, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .btn { font-family: var(--font-main); background: var(--text); color: black; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-size: 1rem; font-weight: 700; transition: all 0.2s; cursor: pointer; display: inline-block; }
 
+        /* --- TIMELINE SECTION --- */
+        #timeline {
+            position: relative;
+            padding: 0 2rem 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        /* NEW RULE: Offset for the logo header jump */
+        #timeline-start {
+            scroll-margin-top: 150px;
+        }
+        
+        #stage1 { 
+            scroll-margin-top: 150px; 
+            margin-top: -15px; 
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 120px; 
+            margin-bottom: 0;
+            position: relative;
+            z-index: 10; 
+        }
+
+        .timeline-header img {
+            height: 100%;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 125px; 
+            bottom: 80px; 
+            width: 1.5px; 
+            background: #ffffff;
+            transform: translateX(-50%);
+            z-index: -1; 
+        }
+
+        .timeline-stage {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.25rem; 
+            opacity: 0.2; 
+            transform: translateY(10px);
+            transition: all 0.6s ease-out;
+            width: 100%;
+        }
+
+        .timeline-stage.active { opacity: 1; transform: translateY(0); }
+
+        .timeline-stage:nth-child(odd) { justify-content: flex-start; }
+        .timeline-stage:nth-child(even) { justify-content: flex-end; }
+
+        .stage-content {
+            width: calc(50% - 30px);
+            position: relative;
+        }
+        
+        .timeline-stage:nth-child(odd) .stage-content { text-align: right; }
+        .timeline-stage:nth-child(even) .stage-content { text-align: left; }
+
+        .stage-marker {
+            position: absolute;
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--bg);
+            border: 2px solid var(--text-gray);
+            border-radius: 50%;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .timeline-stage.active .stage-marker {
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            border-color: #ffffff;
+        }
+
+        .stage-title {
+            font-family: var(--font-main);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: 0.01em;
+        }
+        
+                /* Add this new rule for the subtitles */
+        .stage-subtitle {
+            font-size: 0.5rem; /* 50% smaller than the 1.1rem title */
+            color: var(--text-gray);
+            margin-top: 2px;
+            font-weight: 200;
+        }
+
+        .timeline-end {
+            text-align: center;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-end a {
+            font-family: var(--font-main);
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            background: var(--surface);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .timeline-end a:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
         /* Services Grid Section */
         .section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; background: var(--bg); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
         
         .card { background: var(--surface); padding: 3rem 2.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s, border-color 0.3s; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        
-        /* FIX 4: Use BPdots font for subheadings */
-        .card h3 { 
-            font-family: var(--font-logo); 
-            margin-top: 0; 
-            font-size: 1.5rem; 
-            color: var(--text); 
-            letter-spacing: 0.05em; 
-        }
-        
+        .card h3 { font-family: var(--font-logo); margin-top: 0; font-size: 1.5rem; color: var(--text); letter-spacing: 0.05em; }
         .card p { color: var(--text-gray); line-height: 1.7; font-size: 1rem; font-weight: 300; }
 
         footer { text-align: center; padding: 4rem 2rem; color: var(--text-gray); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.05); background: var(--bg); position: relative; z-index: 2; }
         
+        /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) { 
-            /* On mobile, we reduce the top padding slightly as the screen is smaller */
-            .hero { height: 80vh; padding-top: 60px; } 
+            .hero { 
+                height: 70svh; 
+                min-height: 500px; 
+                /* UPDATED: Increased top padding to 80px to push text down */
+                padding-top: 80px; 
+                padding-bottom: 0;
+            } 
+            
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
+            #timeline { padding: 0 1rem 4rem 1rem; }
+            
             h1 { font-size: 2.2rem; margin-bottom: 2rem; } 
             .logo-img { height: 40px; }
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
+            
+            .timeline-line { left: 50%; transform: translateX(-50%); top: 125px; }
+            .stage-marker { left: 50%; transform: translateX(-50%); }
+            .timeline-stage { justify-content: inherit; margin-left: 0; }
+            .stage-content { width: calc(50% - 30px); margin: 0; }
         }
     </style>
 </head>
@@ -130,7 +271,7 @@
     <div class="dropdown">
         <span class="dropdown-trigger">connect</span>
         <div class="dropdown-content">
-            <a href="mailto:ankurxpodder@gmail.com">email</a>
+            <a href="mailto:contact@dexdogs.com">email</a>
             <a href="https://linkedin.com/company/dexdogs" target="_blank" rel="noopener noreferrer">linkedin</a>
         </div>
     </div>
@@ -140,15 +281,43 @@
     <canvas id="globe-canvas"></canvas>
     <div class="hero-content">
         <h1>your environmental<br>index watchdogs.</h1>
-        <a href="#services" class="btn">how?</a>
+        <a href="#timeline-start" class="btn">Our Stakeholder Network</a>
     </div>
 </section>
 
-<section id="services" class="section">
+<section id="timeline">
+    <div class="timeline-header" id="timeline-start">
+        <img src="ulogo.png" alt="timeline start logo">
+    </div>
+    
+    <div class="timeline-line"></div>
+    
+    <div class="timeline-stage" id="stage1"><div class="stage-content"><div class="stage-title">The Rulemakers</div><div class="stage-subtitle">eg. EPA, Clean Cooking Alliance, LEED / BREEAM</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Manufacturers</div><div class="stage-subtitle">eg. ABB, BURN Manufacturing, Holcim</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Developers</div><div class="stage-subtitle">eg. Climate Impact Partners, Key Carbon, Hines</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Generators</div><div class="stage-subtitle">eg. Gas Generators, Biomass Stoves, Concrete Batch Plants</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Testers</div><div class="stage-subtitle">eg. RATA Stack Testers, Iceed Nigeria, Material Testing Labs</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Loggers</div><div class="stage-subtitle">eg. SCADA Systems, Nexleaf, Autodesk</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Modelers</div><div class="stage-subtitle">eg. LCA Practitioners, Climate Focus, One Click LCA</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Auditors</div><div class="stage-subtitle">eg. TÜV SÜD, Gold Standard VVBs, UL Solutions</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Labelers</div><div class="stage-subtitle">eg. ICVCM, SDG Impact, EPDs</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Minters</div><div class="stage-subtitle">eg. Verra, Gold Standard, EC3 Database</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Raters</div><div class="stage-subtitle">eg. BeZero Carbon, Sylvera, USGBC</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Facilitators</div><div class="stage-subtitle">eg. Xpansiv, Carbon Exchange, Green Procurement Platforms</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Buyers</div><div class="stage-subtitle">eg. Microsoft, Outcome Buyers, REITs</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Reporters</div><div class="stage-subtitle">eg. Watershed, ESG Dive, GRESB</div></div><div class="stage-marker"></div></div>
+    <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Regulators</div><div class="stage-subtitle">eg. IRS, Ministry of Energy, Building Departments</div></div><div class="stage-marker"></div></div>
+    
+    <div class="timeline-end">
+        <a href="#Our Core Capabilities">Our Core Capabilities &darr;</a>
+    </div>
+</section>
+
+<section id="Our Core Capabilities" class="section">
     <div class="grid">
         <div class="card">
             <h3>Data Sourcing and Monitoring</h3>
-            <p>Source all raw data: energy, carbon, waste, climate risks. Audit all supplier environmental product declarations. Watchdog your proprietary data lakehouse.</p>
+            <p>Source all raw data: energy, carbon, waste, resilience, climate risks. Audit all supplier environmental product declarations. Watchdog your proprietary data lakehouse.</p>
         </div>
         <div class="card">
             <h3>Environmental Analysis and Reporting</h3>
@@ -170,54 +339,60 @@
     const ctx = canvas.getContext('2d');
     let width, height, particles = [];
     const isMobile = window.innerWidth < 768;
-    const globeRadius = isMobile ? 160 : 260; 
+    
+    // Dynamic radius maintained
+    let globeRadius = isMobile ? Math.min(window.innerWidth, window.innerHeight) * 0.30 : 260; 
+    
     const particleCount = isMobile ? 350 : 750; 
     let rotation = { x: 0, y: 0 }, targetRotation = { x: 0, y: 0 }, isDragging = false, lastMouse = { x: 0, y: 0 };
-    
-    // FIX 2: Changed KWh to kWh
-    const symbols = ['0', '1', 'kWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'sqft', 'BTU', 'tonnes', 'lbs', '$', 'GWP', '€', '₹', '°C'];
+    const symbols = ['0', '1', 'kWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'ft', 'lbs', '$'];
+
+    let lastWidth = 0; 
 
     function resize() {
-        const dpr = window.devicePixelRatio || 1;
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        ctx.scale(dpr, dpr);
-    }
-    window.addEventListener('resize', resize);
-    resize();
+        const currentWidth = window.innerWidth;
+        if (currentWidth === lastWidth && isMobile) return;
+        lastWidth = currentWidth; 
 
-    for (let i = 0; i < particleCount; i++) {
-        const phi = Math.acos(-1 + (2 * i) / particleCount);
-        const theta = Math.sqrt(particleCount * Math.PI) * phi;
-        particles.push({
-            xBase: globeRadius * Math.cos(theta) * Math.sin(phi),
-            yBase: globeRadius * Math.sin(theta) * Math.sin(phi),
-            zBase: globeRadius * Math.cos(phi),
-            char: symbols[Math.floor(Math.random() * symbols.length)]
-        });
+        const dpr = window.devicePixelRatio || 1;
+        width = window.innerWidth; height = window.innerHeight;
+        
+        if(isMobile) {
+            globeRadius = Math.min(width, height) * 0.30;
+        }
+
+        canvas.width = width * dpr; canvas.height = height * dpr;
+        canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
+        ctx.scale(dpr, dpr);
+        
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            const phi = Math.acos(-1 + (2 * i) / particleCount);
+            const theta = Math.sqrt(particleCount * Math.PI) * phi;
+            particles.push({
+                xBase: globeRadius * Math.cos(theta) * Math.sin(phi),
+                yBase: globeRadius * Math.sin(theta) * Math.sin(phi),
+                zBase: globeRadius * Math.cos(phi),
+                char: symbols[Math.floor(Math.random() * symbols.length)]
+            });
+        }
     }
+    window.addEventListener('resize', resize); 
+    resize();
 
     function handleStart(x, y) { isDragging = true; lastMouse = { x, y }; }
     function handleMove(x, y) {
         if (!isDragging) return;
-        const dx = x - lastMouse.x;
-        const dy = y - lastMouse.y;
-        targetRotation.y += dx * 0.005;
-        targetRotation.x -= dy * 0.005;
+        targetRotation.y += (x - lastMouse.x) * 0.005;
+        targetRotation.x -= (y - lastMouse.y) * 0.005;
         lastMouse = { x, y };
     }
-    function handleEnd() { isDragging = false; }
-
     canvas.addEventListener('mousedown', e => handleStart(e.clientX, e.clientY));
     window.addEventListener('mousemove', e => handleMove(e.clientX, e.clientY));
-    window.addEventListener('mouseup', handleEnd);
+    window.addEventListener('mouseup', () => isDragging = false);
     canvas.addEventListener('touchstart', e => handleStart(e.touches[0].clientX, e.touches[0].clientY), {passive: false});
     window.addEventListener('touchmove', e => { if(isDragging) e.preventDefault(); handleMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive: false});
-    window.addEventListener('touchend', handleEnd);
+    window.addEventListener('touchend', () => isDragging = false);
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
@@ -234,8 +409,8 @@
             renderList.push({ x: x1, y: y2, z: z2, char: p.char });
         });
         renderList.sort((a, b) => a.z - b.z);
-        const cx = width / 2, cy = height / 2;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        const cx = width / 2, cy = height / 2;
         renderList.forEach(p => {
             const scale = 350 / (350 + p.z); 
             const px = cx + p.x * scale, py = cy + p.y * scale;
@@ -249,6 +424,14 @@
         requestAnimationFrame(animate);
     }
     animate();
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+            else entry.target.classList.remove('active');
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.timeline-stage').forEach(stage => observer.observe(stage));
 </script>
 
 </body>
