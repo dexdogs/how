@@ -33,6 +33,26 @@
         .logo-container { display: flex; align-items: center; gap: 15px; }
         .logo-img { height: 60px; width: auto; transition: height 0.3s; }
         .logo-text { font-family: var(--font-logo); font-size: 2.5rem; letter-spacing: 0.05em; color: white; }
+        
+        /* RIGHT NAV CONTAINER */
+        .nav-right { 
+            display: flex; 
+            align-items: center; 
+            gap: 2rem; 
+        }
+
+        /* Services Link Style */
+        .nav-link { 
+            color: var(--text-gray); 
+            transition: color 0.3s; 
+            padding: 10px 0;
+            font-family: var(--font-main);
+            font-size: 1rem; 
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .nav-link:hover { color: var(--text); }
                
         /* DROPDOWN STYLES */
         .dropdown { position: relative; display: inline-block; cursor: pointer; }
@@ -52,7 +72,7 @@
             right: 0;
             top: 100%;
             background-color: var(--surface);
-            min-width: 140px;
+            min-width: 160px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 8px;
@@ -71,6 +91,38 @@
         }
         .dropdown-content a:hover { background-color: rgba(255,255,255,0.05); color: var(--text); }
         .dropdown:hover .dropdown-content { display: block; }
+
+        /* BACK TO TOP BUTTON */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--surface);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        #backToTop.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #backToTop:hover {
+            background-color: var(--text);
+            color: var(--bg);
+            transform: translateY(-3px);
+        }
 
         /* Hero Section */
         .hero { 
@@ -104,7 +156,6 @@
             z-index: 2;
         }
 
-        /* NEW RULE: Offset for the logo header jump */
         #timeline-start {
             scroll-margin-top: 150px;
         }
@@ -193,9 +244,8 @@
             letter-spacing: 0.01em;
         }
         
-                /* Add this new rule for the subtitles */
         .stage-subtitle {
-            font-size: 0.5rem; /* 50% smaller than the 1.1rem title */
+            font-size: 0.5rem; 
             color: var(--text-gray);
             margin-top: 2px;
             font-weight: 200;
@@ -212,11 +262,10 @@
             font-family: var(--font-main);
             text-decoration: none;
             font-size: 1.2rem;
-            display: inline-block; /* Ensures the button transform works */
+            display: inline-block; 
             transition: transform 0.2s;
         }
 
-        
         .timeline-end a:hover {
             color: var(--text);
             border-color: var(--accent);
@@ -238,7 +287,6 @@
             .hero { 
                 height: 70svh; 
                 min-height: 500px; 
-                /* UPDATED: Increased top padding to 80px to push text down */
                 padding-top: 80px; 
                 padding-bottom: 0;
             } 
@@ -246,15 +294,31 @@
             .section { padding: 1rem 1.5rem 4rem 1.5rem; }
             #timeline { padding: 0 1rem 4rem 1rem; }
             
-            h1 { font-size: 2.2rem; margin-bottom: 2rem; } 
+            h1 { font-size: 1.6rem; margin-bottom: 1.5rem; } 
+            
+            .btn { padding: 0.5rem 1.2rem; font-size: 0.8rem; }
+
             .logo-img { height: 40px; }
             .logo-text { font-size: 1.8rem; }
             nav { padding: 1rem; }
             
+            /* STACK Navigation on Mobile: Services ABOVE Connect */
+            .nav-right { 
+                flex-direction: column; 
+                gap: 0.5rem;
+                align-items: flex-end; 
+            }
+            
+            .nav-link { padding: 5px 0; font-size: 0.9rem; }
+            .dropdown-trigger { padding: 5px 0; font-size: 0.9rem; }
+
             .timeline-line { left: 50%; transform: translateX(-50%); top: 125px; }
             .stage-marker { left: 50%; transform: translateX(-50%); }
             .timeline-stage { justify-content: inherit; margin-left: 0; }
             .stage-content { width: calc(50% - 30px); margin: 0; }
+            
+            /* Adjust Back to Top for Mobile */
+            #backToTop { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -265,14 +329,22 @@
         <img src="logo.png" alt="dexdogs logo" class="logo-img">
         <span class="logo-text">dexdogs</span>
     </div>
-    <div class="dropdown">
-        <span class="dropdown-trigger">connect</span>
-        <div class="dropdown-content">
-            <a href="mailto:contact@dexdogs.com">email</a>
-            <a href="https://linkedin.com/company/dexdogs" target="_blank" rel="noopener noreferrer">linkedin</a>
+    
+    <div class="nav-right">
+        <a href="#Our Core Capabilities" class="nav-link">services</a>
+
+        <div class="dropdown">
+            <span class="dropdown-trigger">connect</span>
+            <div class="dropdown-content">
+                <a href="mailto:contact@dexdogs.com">email</a>
+                <a href="https://linkedin.com/company/dexdogs" target="_blank" rel="noopener noreferrer">linkedin</a>
+                <a href="https://calendly.com" target="_blank" rel="noopener noreferrer">schedule a call</a>
+            </div>
         </div>
     </div>
 </nav>
+
+<a href="#" id="backToTop" onclick="scrollToTop(event)">&uarr;</a>
 
 <section class="hero">
     <canvas id="globe-canvas"></canvas>
@@ -306,8 +378,7 @@
     <div class="timeline-stage"><div class="stage-content"><div class="stage-title">The Regulators</div><div class="stage-subtitle">eg. IRS, Ministry of Energy, Building Departments</div></div><div class="stage-marker"></div></div>
     
     <div class="timeline-end">
-        <a href="#Our Core Capabilities"
-    class="btn">Our Core Capabilities &darr;</a>
+        <a href="#Our Core Capabilities" class="btn">Our Core Capabilities &darr;</a>
     </div>
 </section>
 
@@ -338,7 +409,6 @@
     let width, height, particles = [];
     const isMobile = window.innerWidth < 768;
     
-    // Dynamic radius maintained
     let globeRadius = isMobile ? Math.min(window.innerWidth, window.innerHeight) * 0.40 : 260; 
     
     const particleCount = isMobile ? 300 : 750; 
@@ -430,6 +500,18 @@
         });
     }, { threshold: 0.5 });
     document.querySelectorAll('.timeline-stage').forEach(stage => observer.observe(stage));
+
+    // BACK TO TOP LOGIC
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) backToTop.classList.add('visible');
+        else backToTop.classList.remove('visible');
+    });
+
+    function scrollToTop(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 </script>
 
 </body>
