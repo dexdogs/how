@@ -341,9 +341,9 @@
     const isMobile = window.innerWidth < 768;
     
     // Dynamic radius maintained
-    let globeRadius = isMobile ? Math.min(window.innerWidth, window.innerHeight) * 0.45 : 260; 
+    let globeRadius = isMobile ? Math.min(window.innerWidth, window.innerHeight) * 0.40 : 260; 
     
-    const particleCount = isMobile ? 250 : 750; 
+    const particleCount = isMobile ? 300 : 750; 
     let rotation = { x: 0, y: 0 }, targetRotation = { x: 0, y: 0 }, isDragging = false, lastMouse = { x: 0, y: 0 };
     const symbols = ['0', '1', 'kWh', 'CO\u2082', 'CH\u2084', 'kgCO\u2082e', 'ft', 'lbs', '$'];
 
@@ -358,7 +358,7 @@
         width = window.innerWidth; height = window.innerHeight;
         
         if(isMobile) {
-            globeRadius = Math.min(width, height) * 0.45;
+            globeRadius = Math.min(width, height) * 0.40;
         }
 
         canvas.width = width * dpr; canvas.height = height * dpr;
